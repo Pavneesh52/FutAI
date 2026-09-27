@@ -1,0 +1,49 @@
+# Local infrastructure for the AI Football Match Analyst.
+# Postgres is used from Phase 1; Qdrant runs from Phase 0 so the topology is stable,
+# even though nothing connects to it until Phase 7.
+name: football-ai-analyst
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: football-ai-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: app
+      POSTGRES_DB: football
+    ports:
+      # Host port 55432, not 5432. Two reasons a developer machine cannot use 5432:
+      # a native Postgres install usually already owns it, and on Windows Hyper-V/
+      # WinNAT reserves whole port ranges (5433-5532 commonly) where nothing can bind.
+      # Keep DATABASE_URL in sync (see .env.example).
+      - "55432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U app -d football"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+
+  qdrant:
+    image: qdrant/qdrant:v1.19.1
+    container_name: football-ai-qdrant
+    restart: unless-stopped
+    ports:
+      - "6333:6333" # REST
+      - "6334:6334" # gRPC
+    volumes:
+      - qdrant-data:/qdrant/storage
+    healthcheck:
+      # The image has no curl/wget, so probe the REST port over bash's TCP support.
+      test: ["CMD-SHELL", "bash -c ':> /dev/tcp/127.0.0.1/6333'"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+
+volumes:
+  postgres-data:
+  qdrant-data:

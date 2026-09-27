@@ -1,0 +1,182 @@
+[
+  {
+    "match_id": 3943077,
+    "match_date": "2024-07-15",
+    "kick_off": "01:15:00.000",
+    "competition": {
+      "competition_id": 223,
+      "country_name": "South America",
+      "competition_name": "Copa America"
+    },
+    "season": {
+      "season_id": 282,
+      "season_name": "2024"
+    },
+    "home_team": {
+      "home_team_id": 779,
+      "home_team_name": "Argentina",
+      "home_team_gender": "male",
+      "home_team_group": null,
+      "country": {
+        "id": 11,
+        "name": "Argentina"
+      },
+      "managers": [
+        {
+          "id": 5677,
+          "name": "Lionel Sebasti\u00e1n Scaloni",
+          "nickname": null,
+          "dob": "1978-05-16",
+          "country": {
+            "id": 11,
+            "name": "Argentina"
+          }
+        }
+      ]
+    },
+    "away_team": {
+      "away_team_id": 769,
+      "away_team_name": "Colombia",
+      "away_team_gender": "male",
+      "away_team_group": null,
+      "country": {
+        "id": 49,
+        "name": "Colombia"
+      },
+      "managers": [
+        {
+          "id": 5905,
+          "name": "N\u00e9stor Gabriel Lorenzo",
+          "nickname": null,
+          "dob": "1966-02-28",
+          "country": {
+            "id": 11,
+            "name": "Argentina"
+          }
+        }
+      ]
+    },
+    "home_score": 1,
+    "away_score": 0,
+    "match_status": "available",
+    "match_status_360": "unscheduled",
+    "last_updated": "2026-04-28T19:57:53.484308",
+    "last_updated_360": null,
+    "metadata": {
+      "data_version": "1.1.0",
+      "shot_fidelity_version": "2",
+      "xy_fidelity_version": "2"
+    },
+    "match_week": 6,
+    "competition_stage": {
+      "id": 26,
+      "name": "Final"
+    },
+    "stadium": {
+      "id": 5337,
+      "name": "Hard Rock Stadium",
+      "country": {
+        "id": 241,
+        "name": "United States of America"
+      }
+    },
+    "referee": {
+      "id": 2638,
+      "name": "Raphael Claus",
+      "country": {
+        "id": 31,
+        "name": "Brazil"
+      }
+    }
+  },
+  {
+    "match_id": 3942228,
+    "match_date": "2024-07-05",
+    "kick_off": "01:00:00.000",
+    "competition": {
+      "competition_id": 223,
+      "country_name": "South America",
+      "competition_name": "Copa America"
+    },
+    "season": {
+      "season_id": 282,
+      "season_name": "2024"
+    },
+    "home_team": {
+      "home_team_id": 779,
+      "home_team_name": "Argentina",
+      "home_team_gender": "male",
+      "home_team_group": null,
+      "country": {
+        "id": 11,
+        "name": "Argentina"
+      },
+      "managers": [
+        {
+          "id": 5677,
+          "name": "Lionel Sebasti\u00e1n Scaloni",
+          "nickname": null,
+          "dob": "1978-05-16",
+          "country": {
+            "id": 11,
+            "name": "Argentina"
+          }
+        }
+      ]
+    },
+    "away_team": {
+      "away_team_id": 3565,
+      "away_team_name": "Ecuador",
+      "away_team_gender": "male",
+      "away_team_group": null,
+      "country": {
+        "id": 65,
+        "name": "Ecuador"
+      },
+      "managers": [
+        {
+          "id": 5710,
+          "name": "F\u00e9lix S\u00e1nchez Bas",
+          "nickname": "F\u00e9lix S\u00e1nchez",
+          "dob": "1975-12-13",
+          "country": {
+            "id": 214,
+            "name": "Spain"
+          }
+        }
+      ]
+    },
+    "home_score": 1,
+    "away_score": 1,
+    "match_status": "available",
+    "match_status_360": "unscheduled",
+    "last_updated": "2026-04-28T19:50:52.518728",
+    "last_updated_360": null,
+    "metadata": {
+      "data_version": "1.1.0",
+      "shot_fidelity_version": "2",
+      "xy_fidelity_version": "2"
+    },
+    "match_week": 4,
+    "competition_stage": {
+      "id": 11,
+      "name": "Quarter-finals"
+    },
+    "stadium": {
+      "id": 118199,
+      "name": "NRG Stadium",
+      "country": {
+        "id": 241,
+        "name": "United States of America"
+      }
+    },
+    "referee": {
+      "id": 1814,
+      "name": "Andr\u00e9s Matonte",
+      "country": {
+        "id": 242,
+        "name": "Uruguay"
+      }
+    }
+  }
+]

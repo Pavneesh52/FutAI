@@ -1,0 +1,40 @@
+# --- Secrets: never commit .env files, but DO commit the documented example ---
+.env
+.env.*
+!**/.env.example
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+build/
+dist/
+
+# --- Node / frontend ---
+node_modules/
+frontend/dist/
+frontend/.vite/
+*.tsbuildinfo
+
+# --- Data: raw and staged datasets stay out of git (samples are committed explicitly) ---
+**/data/raw/
+**/data/staged/
+**/data/processed/
+!data/samples/
+!**/fixtures/
+
+# --- Evaluation outputs are regenerated, but committed reports live in eval_reports/ ---
+eval_reports/*.json
+
+# --- OS / editor noise ---
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
