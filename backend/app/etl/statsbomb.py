@@ -272,9 +272,9 @@ def parse_events(raw_events: Iterable[dict[str, Any]]) -> tuple[list[ParsedEvent
         # For substitution events, capture the incoming replacement player.
         replacement_player_src: str | None = None
         if event_type == "substitution":
-            replacement_raw_id = (
-                (event.get("substitution") or {}).get("replacement") or {}
-            ).get("id")
+            replacement_raw_id = ((event.get("substitution") or {}).get("replacement") or {}).get(
+                "id"
+            )
             if replacement_raw_id is not None:
                 replacement_player_src = source_id("player", int(replacement_raw_id))
 

@@ -13,8 +13,5 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: ['./src/test/setup.ts'],
     include: ['src/**/*.test.{ts,tsx}'],
-    // The default `forks` pool intermittently times out starting workers on Windows;
-    // `threads` is faster to boot and behaves the same for these tests.
-    pool: 'threads',
   },
 })

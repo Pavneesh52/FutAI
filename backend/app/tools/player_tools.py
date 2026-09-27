@@ -163,9 +163,7 @@ async def calculate_player_metric(
         total_passes = sum((s.passes or 0) for s in stats)
         if total_passes > 0:
             # Weighted average
-            completed = sum(
-                ((s.pass_accuracy or 0.0) / 100.0 * (s.passes or 0)) for s in stats
-            )
+            completed = sum(((s.pass_accuracy or 0.0) / 100.0 * (s.passes or 0)) for s in stats)
             val = round(100.0 * completed / total_passes, 1)
         else:
             val = None

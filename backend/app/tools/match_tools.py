@@ -142,9 +142,7 @@ async def get_match_players(service: MatchDataService, match_id: int) -> ToolRes
 
     # Only include players who actually played (minutes > 0) to keep payload compact.
     active = [p for p in players if (p.minutes_played or 0) > 0]
-    evidence_refs: list[str] = [
-        f"player_match_stats:{match_id}:{p.player_id}" for p in active
-    ]
+    evidence_refs: list[str] = [f"player_match_stats:{match_id}:{p.player_id}" for p in active]
 
     # Compact representation: drop null/zero fields and match_id (caller knows it).
     compact: list[dict[str, Any]] = []
@@ -179,4 +177,3 @@ async def get_match_players(service: MatchDataService, match_id: int) -> ToolRes
         "players": compact,
     }
     return ToolResult(data=data, evidence_refs=evidence_refs)
-

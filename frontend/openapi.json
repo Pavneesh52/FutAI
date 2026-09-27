@@ -8,9 +8,7 @@
   "paths": {
     "/health": {
       "get": {
-        "tags": [
-          "health"
-        ],
+        "tags": ["health"],
         "summary": "Liveness check plus dependency status",
         "description": "Report whether the API is up, and whether its database is reachable.\n\nAlways returns HTTP 200 while the process is serving: a database that is down or\nnot yet configured is reported in the body (rule R5 -- degrade, don't crash).",
         "operationId": "health_health_get",
@@ -30,9 +28,7 @@
     },
     "/matches": {
       "get": {
-        "tags": [
-          "matches"
-        ],
+        "tags": ["matches"],
         "summary": "List matches",
         "description": "All ingested matches, most recent first.",
         "operationId": "list_matches_matches_get",
@@ -56,9 +52,7 @@
     },
     "/matches/{match_id}": {
       "get": {
-        "tags": [
-          "matches"
-        ],
+        "tags": ["matches"],
         "summary": "One match",
         "description": "A match with the counts that tell you what data exists for it.",
         "operationId": "get_match_matches__match_id__get",
@@ -99,9 +93,7 @@
     },
     "/matches/{match_id}/events": {
       "get": {
-        "tags": [
-          "matches"
-        ],
+        "tags": ["matches"],
         "summary": "A match's events",
         "description": "Events in match order, optionally filtered by normalised type.",
         "operationId": "get_events_matches__match_id__events_get",
@@ -164,9 +156,7 @@
     },
     "/matches/{match_id}/players": {
       "get": {
-        "tags": [
-          "matches"
-        ],
+        "tags": ["matches"],
         "summary": "Per-player aggregates for a match",
         "description": "Per-player aggregates, most minutes first. Unused substitutes appear with 0 minutes.",
         "operationId": "get_players_matches__match_id__players_get",
@@ -211,9 +201,7 @@
     },
     "/matches/{match_id}/stats": {
       "get": {
-        "tags": [
-          "matches"
-        ],
+        "tags": ["matches"],
         "summary": "Per-team match statistics",
         "description": "Per-team match aggregates (possession %, xG, PPDA, field tilt, shots, passes).",
         "operationId": "get_team_stats_matches__match_id__stats_get",
@@ -276,9 +264,7 @@
     },
     "/analysis": {
       "post": {
-        "tags": [
-          "analysis"
-        ],
+        "tags": ["analysis"],
         "summary": "Analyze Query",
         "description": "Analyze a football question using deterministic tools and Grok.",
         "operationId": "analyze_query_analysis_post",
@@ -338,9 +324,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "query"
-        ],
+        "required": ["query"],
         "title": "AnalysisRequest",
         "description": "Payload for POST /analysis."
       },
@@ -352,13 +336,7 @@
           },
           "query_type": {
             "type": "string",
-            "enum": [
-              "simple_stat",
-              "player",
-              "tactical",
-              "comparison",
-              "report"
-            ],
+            "enum": ["simple_stat", "player", "tactical", "comparison", "report"],
             "title": "Query Type"
           },
           "answer_markdown": {
@@ -398,11 +376,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "run_id",
-          "query_type",
-          "answer_markdown"
-        ],
+        "required": ["run_id", "query_type", "answer_markdown"],
         "title": "AnalysisResult",
         "description": "Response contract for POST /analysis and base for specialized queries."
       },
@@ -421,10 +395,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "ref",
-          "label"
-        ],
+        "required": ["ref", "label"],
         "title": "EvidenceItem",
         "description": "One resolved evidence_ref, rendered in the UI's Evidence list."
       },
@@ -445,29 +416,19 @@
         "properties": {
           "status": {
             "type": "string",
-            "enum": [
-              "ok",
-              "degraded"
-            ],
+            "enum": ["ok", "degraded"],
             "title": "Status",
             "description": "`degraded` when a required dependency is unreachable; the process is still serving."
           },
           "db": {
             "type": "string",
-            "enum": [
-              "ok",
-              "unavailable",
-              "not_configured"
-            ],
+            "enum": ["ok", "unavailable", "not_configured"],
             "title": "Db",
             "description": "Database probe result: `ok`, `unavailable`, or `not_configured`."
           }
         },
         "type": "object",
-        "required": [
-          "status",
-          "db"
-        ],
+        "required": ["status", "db"],
         "title": "HealthResponse",
         "description": "Result of `GET /health`."
       },
@@ -649,14 +610,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "id",
-          "match_id",
-          "minute",
-          "second",
-          "event_type",
-          "team_id"
-        ],
+        "required": ["id", "match_id", "minute", "second", "event_type", "team_id"],
         "title": "MatchEvent",
         "description": "A single event, with our own surrogate `id` (the source id is a UUID)."
       },
@@ -710,14 +664,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "id",
-          "home_team",
-          "away_team",
-          "competition",
-          "season",
-          "match_date"
-        ],
+        "required": ["id", "home_team", "away_team", "competition", "season", "match_date"],
         "title": "MatchSummary",
         "description": "One row of `GET /matches`."
       },
@@ -851,12 +798,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "match_id",
-          "player_id",
-          "player_name",
-          "team_id"
-        ],
+        "required": ["match_id", "player_id", "player_name", "team_id"],
         "title": "PlayerMatchStats",
         "description": "Aggregated player performance in one match."
       },
@@ -872,10 +814,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "title",
-          "url"
-        ],
+        "required": ["title", "url"],
         "title": "SourceItem",
         "description": "RAG citations only (Phase 7)."
       },
@@ -994,11 +933,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "match_id",
-          "team_id",
-          "team_name"
-        ],
+        "required": ["match_id", "team_id", "team_name"],
         "title": "TeamMatchStats",
         "description": "Aggregated team performance in one match."
       },
@@ -1025,10 +960,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "id",
-          "name"
-        ],
+        "required": ["id", "name"],
         "title": "TeamSummary",
         "description": "A team, as embedded in a match summary."
       },
@@ -1065,11 +997,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "loc",
-          "msg",
-          "type"
-        ],
+        "required": ["loc", "msg", "type"],
         "title": "ValidationError"
       }
     }

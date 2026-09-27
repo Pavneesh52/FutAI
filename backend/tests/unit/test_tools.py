@@ -254,7 +254,7 @@ async def test_get_match_events_filtering_and_truncation(
 ) -> None:
     res = await get_match_events(stub_service, match_id=100, event_type="shot")
     assert len(res.data["events"]) == 1
-    assert res.data["events"][0]["event_type"] == "shot"
+    assert res.data["events"][0]["type"] == "shot"
     assert "event:2" in res.evidence_refs
     assert res.data["is_truncated"] is False
 
@@ -298,7 +298,7 @@ async def test_calculate_player_metric(stub_service: StubMatchDataService) -> No
 async def test_tool_registry_execution(stub_service: StubMatchDataService) -> None:
     registry = create_default_tool_registry()
     schemas = registry.get_openai_tool_schemas()
-    assert len(schemas) == 7
+    assert len(schemas) == 8
 
     # Test execution
     res = await registry.execute("get_match_stats", {"match_id": 100}, stub_service)

@@ -22,7 +22,8 @@ from app.tools.registry import ToolRegistry, create_default_tool_registry
 
 logger = get_logger(__name__)
 
-SYSTEM_PROMPT = """You are an expert AI Football Match Analyst. Provide accurate, data-grounded analysis using only the provided tools.
+SYSTEM_PROMPT = """You are an expert AI Football Match Analyst.
+Provide accurate, data-grounded analysis using only the provided tools.
 
 RULES:
 1. ONLY state numbers from tool results. NEVER guess or invent stats.
@@ -34,7 +35,7 @@ RULES:
 OUTPUT: When done gathering data, respond with ONLY this JSON:
 {"query_type": "simple_stat"|"player"|"tactical"|"comparison"|"report",
  "answer_markdown": "<markdown answer citing tool numbers>",
- "evidence": [{"ref": "<exact ref from tool>", "label": "<description>", "value": <number or string>}],
+ "evidence": [{"ref": "<exact ref>", "label": "<desc>", "value": <number or string>}],
  "confidence": <0.0-1.0>}
 """
 
@@ -42,9 +43,7 @@ OUTPUT: When done gathering data, respond with ONLY this JSON:
 class AgentOutputSchema(BaseModel):
     """Pydantic model for the agent's final JSON response."""
 
-    query_type: Literal["simple_stat", "player", "tactical", "comparison", "report"] = (
-        "simple_stat"
-    )
+    query_type: Literal["simple_stat", "player", "tactical", "comparison", "report"] = "simple_stat"
     answer_markdown: str
     evidence: list[EvidenceItem] = Field(default_factory=list)
     confidence: float = Field(default=1.0, ge=0.0, le=1.0)
@@ -113,7 +112,9 @@ class BasicAnalystAgent:
             "type": "function",
             "function": {
                 "name": "submit_final_analysis",
-                "description": "Submit the final structured football analysis once all data has been gathered from tools.",
+                "description": (
+                    "Submit the final structured analysis once all data has been gathered."
+                ),
                 "parameters": AgentOutputSchema.model_json_schema(),
             },
         }
@@ -121,7 +122,7 @@ class BasicAnalystAgent:
             "type": "function",
             "function": {
                 "name": "json",
-                "description": "Output final structured JSON response matching the analysis schema.",
+                "description": "Output final structured JSON matching the analysis schema.",
                 "parameters": AgentOutputSchema.model_json_schema(),
             },
         }
@@ -149,12 +150,17 @@ class BasicAnalystAgent:
             )
 
             if response.has_tool_calls:
-                # Check if model returned final JSON inside a pseudo tool call (e.g. 'json' or 'submit')
+                # Check if model returned final JSON inside a pseudo tool call
                 for tc in response.tool_calls:
                     if (
-                        tc.name in ("json", "final_answer", "submit_analysis", "AgentOutputSchema")
-                        or tc.name not in self.tools._tools
-                    ) and isinstance(tc.arguments, dict) and "answer_markdown" in tc.arguments:
+                        (
+                            tc.name
+                            in ("json", "final_answer", "submit_analysis", "AgentOutputSchema")
+                            or tc.name not in self.tools._tools
+                        )
+                        and isinstance(tc.arguments, dict)
+                        and "answer_markdown" in tc.arguments
+                    ):
                         try:
                             agent_output = AgentOutputSchema.model_validate(tc.arguments)
                             return AnalysisResult(
