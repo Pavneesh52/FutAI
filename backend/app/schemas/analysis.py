@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import Literal
+from typing import Any, Literal
 
 from pydantic import BaseModel, Field
 
@@ -20,7 +20,7 @@ class EvidenceItem(BaseModel):
 
     ref: str
     label: str
-    value: str | float | int | list | dict | None = None
+    value: str | float | int | list[Any] | dict[str, Any] | None = None
 
 
 class SourceItem(BaseModel):
