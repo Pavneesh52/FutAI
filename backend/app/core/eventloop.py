@@ -30,11 +30,10 @@ def use_psycopg_compatible_event_loop() -> None:
     ``WindowsSelectorEventLoopPolicy`` still exists in 3.12 (it is deprecated only in
     3.14), and is looked up dynamically so the import cannot fail on other platforms.
     """
-    if sys.platform != "win32":
-        return
-    policy = getattr(asyncio, "WindowsSelectorEventLoopPolicy", None)
-    if policy is not None:
-        asyncio.set_event_loop_policy(policy())
+    if sys.platform == "win32":
+        policy = getattr(asyncio, "WindowsSelectorEventLoopPolicy", None)
+        if policy is not None:
+            asyncio.set_event_loop_policy(policy())
 
 
 def psycopg_safe_uvicorn_loop_factory() -> asyncio.AbstractEventLoop:
