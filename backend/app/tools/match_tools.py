@@ -73,20 +73,6 @@ async def get_match_events(
     Returns capped list of events and a truncation indicator.
     """
     events = await service.get_events(match_id=match_id, event_type=event_type)
-    if event_type is None:
-        impact_types = {
-            "Shot",
-            "Goal",
-            "Own Goal For",
-            "Own Goal Against",
-            "Bad Behaviour",
-            "Foul Committed",
-            "Card",
-        }
-        high_impact = [e for e in events if e.event_type in impact_types or (e.xg or 0) > 0.05]
-        if high_impact:
-            events = high_impact
-
     total_events = len(events)
     capped_events = events[:limit]
     is_truncated = total_events > limit
