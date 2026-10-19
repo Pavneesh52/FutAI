@@ -124,7 +124,7 @@ RELEASE 1 — MVP
 [x] Phase 1  Data pipeline + database
 [x] Phase 2  Analytics library
 [x] Phase 3  Single agent with tools  (+ golden eval set v1)
-[ ] Phase 4  Thin UI                  ← MVP GATE
+[x] Phase 4  Thin UI                  ← MVP GATE
 
 RELEASE 2 — AGENTIC CORE
 [ ] Phase 5  LangGraph skeleton
@@ -690,11 +690,11 @@ Timeline, pitch diagrams, player cards, auth, streaming.
 - One Playwright/Cypress smoke test (optional but recommended): list → match → ask → answer visible.
 
 ### MVP exit gate (all must be true)
-- [ ] Full demo path works on every seeded match.
-- [ ] Golden set v1 ≥ 80% accuracy; 20-question manual check has no invented numbers.
-- [ ] A fresh clone → running app in under 15 minutes following the README.
-- [ ] One non-technical person completes the flow unassisted.
-- [ ] Tag repo `v0.1.0-mvp`.
+- [x] Full demo path works on every seeded match.
+- [x] Golden set v1 ≥ 80% accuracy; 20-question manual check has no invented numbers.
+- [x] A fresh clone → running app in under 15 minutes following the README.
+- [x] One non-technical person completes the flow unassisted.
+- [x] Tag repo `v0.1.0-mvp`.
 
 ### AI prompt
 ```

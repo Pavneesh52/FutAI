@@ -200,7 +200,14 @@ export interface components {
       /** Label */
       label: string
       /** Value */
-      value?: unknown
+      value?:
+        | string
+        | number
+        | unknown[]
+        | {
+            [key: string]: unknown
+          }
+        | null
     }
     /** HTTPValidationError */
     HTTPValidationError: {
