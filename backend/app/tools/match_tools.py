@@ -28,10 +28,10 @@ class GetMatchEventsInput(BaseModel):
         description="Optional event type to filter on (e.g. 'shot', 'pass', 'tackle', 'goal').",
     )
     limit: int = Field(
-        default=50,
+        default=25,
         ge=1,
-        le=200,
-        description="Maximum number of events to return. Defaults to 50, maximum is 200.",
+        le=100,
+        description="Maximum number of events to return. Defaults to 25, maximum is 100.",
     )
 
 
@@ -73,6 +73,20 @@ async def get_match_events(
     Returns capped list of events and a truncation indicator.
     """
     events = await service.get_events(match_id=match_id, event_type=event_type)
+    if event_type is None:
+        impact_types = {
+            "Shot",
+            "Goal",
+            "Own Goal For",
+            "Own Goal Against",
+            "Bad Behaviour",
+            "Foul Committed",
+            "Card",
+        }
+        high_impact = [e for e in events if e.event_type in impact_types or (e.xg or 0) > 0.05]
+        if high_impact:
+            events = high_impact
+
     total_events = len(events)
     capped_events = events[:limit]
     is_truncated = total_events > limit

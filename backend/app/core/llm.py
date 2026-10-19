@@ -89,6 +89,7 @@ class LLMClient:
             "model": self.model,
             "messages": messages,
             "temperature": temperature,
+            "max_tokens": 1024,
         }
         if tools:
             kwargs["tools"] = tools

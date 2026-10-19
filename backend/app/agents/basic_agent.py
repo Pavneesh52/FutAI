@@ -203,12 +203,25 @@ class BasicAnalystAgent:
                             service=service,
                         )
                         collected_evidence_refs.extend(tool_result.evidence_refs)
-                        content_str = json.dumps(
-                            {
-                                "data": tool_result.data,
-                                "evidence_refs": tool_result.evidence_refs,
-                            }
-                        )
+                        full_payload = {
+                            "data": tool_result.data,
+                            "evidence_refs": tool_result.evidence_refs,
+                        }
+                        content_str = json.dumps(full_payload)
+                        if len(content_str) > 3500:
+                            if isinstance(tool_result.data, dict) and "events" in tool_result.data:
+                                tool_result.data["events"] = tool_result.data["events"][:15]
+                            elif (
+                                isinstance(tool_result.data, dict) and "players" in tool_result.data
+                            ):
+                                tool_result.data["players"] = tool_result.data["players"][:15]
+                            content_str = json.dumps(
+                                {
+                                    "data": tool_result.data,
+                                    "evidence_refs": tool_result.evidence_refs[:15],
+                                    "truncated": True,
+                                }
+                            )
                     except Exception as exc:
                         logger.warning(
                             "tool_failed tool=%s err=%s",
